@@ -1,10 +1,26 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import CreateBlog from "./Components/CreateBlog";
+import Body from "./Components/Body";
+import ErrorPage from "./Components/ErrorPage";
+import store from "./store/Store";
+import { Provider } from "react-redux";
+import EditBlog from "./Components/EditBlog";
+import DisplayBlogOnclick from "./Components/DisplayBlogOnclick";
 
 function App() {
-
   return (
-    <>
-      <h1>hi</h1>{" "}
-    </>
+    <div className="w-screen min-h-screen">
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Body />} errorElement={<ErrorPage />} />
+            <Route path="/create" element={<CreateBlog />} />
+            <Route path="/blog/edit" element={<EditBlog />} />
+            <Route path="/Blog" element={<DisplayBlogOnclick/>} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
+    </div>
   );
 }
 
