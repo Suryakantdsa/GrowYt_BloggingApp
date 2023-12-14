@@ -1,16 +1,16 @@
-import express from "express"
-import cors from "cors"
+const express = require("express");
+const cors = require("cors");
 
-const app =express()
+const app = express();
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
-import createBlog from "./routes/createBlog.routes.js"
-import readBlog from "./routes/readBlog.routes.js"
-import readOne from "./routes/readOne.route.js"
-import updateBlog from "./routes/updateBlog.routes.js"
-import deleteBlog from "./routes/deleteBlog.routes.js"
+const createBlog = require("./routes/createBlog.routes.js");
+const readBlog = require("./routes/readBlog.routes.js");
+const readOne = require("./routes/readOne.route.js");
+const updateBlog = require("./routes/updateBlog.routes.js");
+const deleteBlog = require("./routes/deleteBlog.routes.js");
 
 app.use("/create", createBlog);
 app.use("/", readBlog);
@@ -19,6 +19,4 @@ app.use("/blog/edit", readOne);
 app.use("/blog/edit", updateBlog);
 app.use("/blog", deleteBlog);
 
-
-
-export {app}
+module.exports = { app };

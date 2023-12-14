@@ -1,7 +1,7 @@
-import { Router } from "express";
-import { Blog } from "../Models/Blog.model.js"; 
+const express = require("express");
+const { Blog } = require("../Models/Blog.model.js");
 
-const router=Router()
+const router = express.Router();
 
 router.get("/", async (req, resp) => {
     try {
@@ -11,9 +11,9 @@ router.get("/", async (req, resp) => {
         } else {
             resp.send(blogs);
         }
-    } catch {
+    } catch (error) {
         resp.status(400).json({ message: "error occurred while fetching blogs" });
     }
 });
 
-export default router
+module.exports = router;
