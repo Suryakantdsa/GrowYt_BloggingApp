@@ -11,7 +11,7 @@ const DisplayBlogOnclick = () => {
 
   const getBlogInfo = async () => {
     try {
-      let blog = await fetch(`http://localhost:8000/blog/${id}`);
+      let blog = await fetch(`https://bloggingapp-2f6z.onrender.com/${id}`);
       let json = await blog.json();
       setBlog(json);
     } catch (error) {
@@ -23,7 +23,7 @@ const DisplayBlogOnclick = () => {
 
     if (confirmDelete) {
       try {
-        let result = await fetch(`http://localhost:8000/blog/${id}`, {
+        let result = await fetch(`https://bloggingapp-2f6z.onrender.com/blog/${id}`, {
           method: "DELETE",
         });
 
