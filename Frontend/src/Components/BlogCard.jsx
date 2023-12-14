@@ -1,26 +1,54 @@
 import React from "react";
+import { formatCreatedAt } from "../utils/formatCreatedAt";
+import { useNavigate } from "react-router-dom";
 
-const BlogCard = () => {
+const BlogCard = ({ blog }) => {
+  const navigate = useNavigate();
+  const time = formatCreatedAt(blog.createdAt);
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Do you want to delete this blog?");
+
+    if (confirmDelete) {
+      try {
+        let result = await fetch(`http://localhost:8000/blog/${id}`, {
+          method: "DELETE",
+        });
+
+        result = await result.json();
+        if (result) {
+            if (window.location.pathname === "/") {
+              window.location.reload();
+            } else {
+              navigate("/");
+            }
+          }
+      } catch (error) {
+        console.error("Error deleting blog:", error);
+      }
+    }
+  };
+
   return (
-    <div className="p-4 w-full flex flex-col border border-orange-400 shadow-xl rounded-md my-4">
+    < >
       <header className=" flex justify-between ">
         <div className="">
-          <h1 className="text-2xl font-bold ">My blogs</h1>
-          <p className="italic text-sm">Dec 12 2023</p>
+          <h1 className="text-2xl font-bold ">{blog.title}</h1>
+          <p className="italic text-sm">{time}</p>
         </div>
         <div>
           <button>
             <i className="fa-solid fa-pen-to-square"></i>
           </button>
-          <button className="pl-2">
+          <button onClick={() => handleDelete(blog._id)} className="pl-2">
             <i className="fa-solid fa-trash text-red-500"></i>
           </button>
         </div>
       </header>
       <article className="py-2 text-slate-700">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam quos in pariatur fuga. Quos porro aut laboriosam voluptates dolores aperiam beatae molestias? Distinctio quae voluptatum, explicabo saepe reprehenderit voluptates dicta ut. Quis voluptas vero adipisci nesciunt fugit maiores dignissimos praesentium dolorum perferendis, fuga natus quibusdam veritatis enim ipsum libero sed doloribus ex tempora iure magnam alias et? Modi, distinctio tempora.</p>
+        <p>{blog.body}</p>
       </article>
-    </div>
+    </>
   );
 };
 

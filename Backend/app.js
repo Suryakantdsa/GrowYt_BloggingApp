@@ -15,7 +15,8 @@ import deleteBlog from "./routes/deleteBlog.routes.js"
 app.use("/create", createBlog);
 app.use("/", readBlog);
 app.use("/blog", readOne);
-app.use("/blog", updateBlog);
+app.use("/blog/edit", readOne);
+app.use("/blog/edit", updateBlog);
 app.use("/blog", deleteBlog);
 
 

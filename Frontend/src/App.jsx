@@ -17,6 +17,8 @@ function App() {
             <Route path="/create" element={<CreateBlog />} />
             <Route path="/blog/edit" element={<EditBlog />} />
             <Route path="/Blog" element={<DisplayBlogOnclick/>} />
+            <Route path="/Blog/:id" element={<DisplayBlogOnclick/>} />
+            <Route path="/Blog/edit/:id" element={<EditBlog/>} />
           </Routes>
         </BrowserRouter>
       </Provider>
