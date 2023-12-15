@@ -1,10 +1,7 @@
-const dotenv = require("dotenv");
+
 const connectDB = require("./db/dbConnection.js");
 const { app } = require("./app.js");
 
-dotenv.config({
-    path: './.env'
-});
 const PORT=8000
 // mongodb connection
 connectDB()
